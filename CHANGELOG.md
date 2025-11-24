@@ -1,2 +1,4 @@
 ## 1.0.0
-- Initial version.
+* Initial version.
+## 1.0.1
+* add minValue, maxValue, contains()

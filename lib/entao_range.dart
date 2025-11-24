@@ -3,12 +3,64 @@ library;
 class OpenRange extends IntRange {
   OpenRange(super.start, super.end, {super.step});
 
+  int? get minValue {
+    if (start == end) return null;
+    if (step > 0) return start;
+    if (step == -1) return end;
+    int m = -(end - start) % step;
+    if (m != 0) return m + end;
+    return end - step;
+  }
+
+  int? get maxValue {
+    if (start == end) return null;
+    if (step < 0) return start;
+    if (step == 1) return end - 1;
+    int m = (end - start) % step;
+    if (m != 0) return end - m;
+    return end - step;
+  }
+
+  @override
+  bool contains(Object? element) {
+    if (element == null || element is! int) return false;
+    int? minVal = minValue;
+    if (minVal == null) return false;
+    int? maxVal = maxValue;
+    if (maxVal == null) return false;
+    if (element > maxVal) return false;
+    if (element < minVal) return false;
+    return (element - minVal) % step == 0;
+  }
+
   @override
   Iterator<int> get iterator => _OpenRangeIterator(this);
 }
 
 class CloseRange extends IntRange {
   CloseRange(super.start, super.end, {super.step});
+
+  int get minValue {
+    if (step > 0) return start;
+    if (step == -1) return end;
+    return -(end - start) % step + end;
+  }
+
+  int get maxValue {
+    if (step < 0) return start;
+    if (step == 1) return end;
+    return end - (end - start) % step;
+  }
+
+  @override
+  bool contains(Object? element) {
+    if (element == null || element is! int) return false;
+    int minVal = minValue;
+    int maxVal = maxValue;
+    if (element > maxVal) return false;
+    if (element < minVal) return false;
+    return (element - minVal) % step == 0;
+  }
 
   @override
   Iterator<int> get iterator => _CloseRangeIterator(this);
@@ -24,6 +76,8 @@ sealed class IntRange extends Iterable<int> {
   bool get isClosed => this is CloseRange;
 
   bool get isOpen => this is OpenRange;
+
+  String get desc => isClosed ? "CloseRange($start, $end, step:$step)" : "OpenRange($start, $end, step:$step)";
 }
 
 class _OpenRangeIterator implements Iterator<int> {
