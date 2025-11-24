@@ -2,3 +2,6 @@
 * Initial version.
 ## 1.0.1
 * add minValue, maxValue, contains()
+
+## 1.0.2
+* add List.indexes

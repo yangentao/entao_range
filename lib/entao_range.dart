@@ -131,3 +131,7 @@ extension IntRangeExt on int {
 
   OpenRange downUntil(int value, {int step = -1}) => OpenRange(this, value, step: step);
 }
+
+extension ListIndexRangeExt on List {
+  OpenRange get indexes => length.indexes;
+}
