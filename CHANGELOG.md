@@ -5,3 +5,6 @@
 
 ## 1.0.2
 * add List.indexes
+
+## 1.0.3
+* add == and hashCode

@@ -35,6 +35,19 @@ class OpenRange extends IntRange {
 
   @override
   Iterator<int> get iterator => _OpenRangeIterator(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (other is OpenRange) {
+      return start == other.start && end == other.end && step == other.step;
+    }
+    return false;
+  }
+
+  @override
+  int get hashCode {
+    return start.hashCode + end.hashCode + step.hashCode;
+  }
 }
 
 class CloseRange extends IntRange {
@@ -64,6 +77,19 @@ class CloseRange extends IntRange {
 
   @override
   Iterator<int> get iterator => _CloseRangeIterator(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (other is CloseRange) {
+      return start == other.start && end == other.end && step == other.step;
+    }
+    return false;
+  }
+
+  @override
+  int get hashCode {
+    return start.hashCode + end.hashCode + step.hashCode + 1;
+  }
 }
 
 sealed class IntRange extends Iterable<int> {
