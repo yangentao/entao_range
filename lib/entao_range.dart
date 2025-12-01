@@ -9,10 +9,16 @@ class OpenRange extends IntRange {
     if (step == -1) return start - end;
 
     if (step > 0) {
-      return 1 + ((end - start - 1) * 1.0 / step).floor();
+      return ((end - start + step - 1) * 1.0 / step).floor();
     } else {
-      return 1 + ((start - end - 1) * 1.0 / -step).floor();
+      return ((start - end - step - 1) * 1.0 / -step).floor();
     }
+
+    // if (step > 0) {
+    //   return 1 + ((end - start - 1) * 1.0 / step).floor();
+    // } else {
+    //   return 1 + ((start - end - 1) * 1.0 / -step).floor();
+    // }
   }
 
   int? get minValue {
@@ -70,9 +76,9 @@ class CloseRange extends IntRange {
     if (step == 1) return end - start + 1;
     if (step == -1) return start - end + 1;
     if (step > 0) {
-      return 1 + ((end - start) * 1.0 / step).floor();
+      return ((end - start + step) * 1.0 / step).floor();
     } else {
-      return 1 + ((start - end) * 1.0 / -step).floor();
+      return ((start - end - step) * 1.0 / -step).floor();
     }
   }
 

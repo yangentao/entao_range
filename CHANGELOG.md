@@ -11,3 +11,6 @@
 
 ## 1.0.4
 * property length
+
+## 1.0.5
+* property length
