@@ -3,6 +3,18 @@ library;
 class OpenRange extends IntRange {
   OpenRange(super.start, super.end, {super.step});
 
+  @override
+  int get length {
+    if (step == 1) return end - start;
+    if (step == -1) return start - end;
+
+    if (step > 0) {
+      return 1 + ((end - start - 1) * 1.0 / step).floor();
+    } else {
+      return 1 + ((start - end - 1) * 1.0 / -step).floor();
+    }
+  }
+
   int? get minValue {
     if (start == end) return null;
     if (step > 0) return start;
@@ -52,6 +64,17 @@ class OpenRange extends IntRange {
 
 class CloseRange extends IntRange {
   CloseRange(super.start, super.end, {super.step});
+
+  @override
+  int get length {
+    if (step == 1) return end - start + 1;
+    if (step == -1) return start - end + 1;
+    if (step > 0) {
+      return 1 + ((end - start) * 1.0 / step).floor();
+    } else {
+      return 1 + ((start - end) * 1.0 / -step).floor();
+    }
+  }
 
   int get minValue {
     if (step > 0) return start;

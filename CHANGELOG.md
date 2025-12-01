@@ -8,3 +8,6 @@
 
 ## 1.0.3
 * add == and hashCode
+
+## 1.0.4
+* property length
