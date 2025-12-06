@@ -14,3 +14,6 @@
 
 ## 1.0.5
 * property length
+
+## 1.0.6
+* readme
